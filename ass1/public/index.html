@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movies App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; max-width: 900px; }
+    .row { display: flex; gap: 24px; flex-wrap: wrap; }
+    .card { border: 1px solid #ddd; padding: 14px; border-radius: 10px; margin: 10px 0; }
+    input, button { padding: 10px; }
+    input { width: 100%; box-sizing: border-box; }
+    button { cursor: pointer; }
+    .muted { color: #666; font-size: 14px; }
+    .grid { display: grid; gap: 10px; }
+    .pill { display: inline-block; padding: 4px 10px; border: 1px solid #ddd; border-radius: 999px; font-size: 13px; }
+    .danger { border-color: #ffb3b3; }
+  </style>
+</head>
+<body>
+  <h1>Movies Project (Assignment 4)</h1>
+  <p class="muted">Register/login to get a JWT token. Admin can manage Movies. Users can create reviews and delete their own reviews.</p>
+
+  <div class="card">
+    <div><strong>Session</strong></div>
+    <div class="muted" id="sessionInfo">Not logged in</div>
+    <div style="margin-top:10px;">
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card" style="flex:1; min-width: 280px;">
+      <h2>Register</h2>
+      <div class="grid">
+        <input id="regEmail" placeholder="Email" />
+        <input id="regPassword" type="password" placeholder="Password" />
+        <input id="regRole" placeholder='Role (optional: "admin")' />
+        <button id="registerBtn">Register</button>
+      </div>
+      <div class="muted" id="registerMsg"></div>
+    </div>
+
+    <div class="card" style="flex:1; min-width: 280px;">
+      <h2>Login</h2>
+      <div class="grid">
+        <input id="loginEmail" placeholder="Email" />
+        <input id="loginPassword" type="password" placeholder="Password" />
+        <button id="loginBtn">Login</button>
+      </div>
+      <div class="muted" id="loginMsg"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Movies (Public GET)</h2>
+    <button id="loadMoviesBtn">Load Movies</button>
+    <div id="movies"></div>
+  </div>
+
+  <div class="card">
+    <h2>Create Review (Login required)</h2>
+    <div class="muted">You need a token. The backend will store the owner (userId) from your token.</div>
+    <div class="grid" style="margin-top:10px;">
+      <input id="reviewMovieId" placeholder="Movie ID (MongoDB _id)" />
+      <input id="reviewerName" placeholder="Reviewer name" />
+      <input id="reviewComment" placeholder="Comment" />
+      <input id="reviewRating" type="number" placeholder="Rating (1-10)" />
+      <button id="createReviewBtn">Create Review</button>
+    </div>
+    <div class="muted" id="createReviewMsg"></div>
+  </div>
+
+  <div class="card">
+    <h2>Reviews</h2>
+    <button id="loadReviewsBtn">Load Reviews</button>
+    <div class="muted">Delete will succeed only if you are the owner or admin. Otherwise it will return 403.</div>
+    <div id="reviews"></div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
