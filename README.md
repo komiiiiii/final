@@ -1,5 +1,10 @@
 # Movies Management System
 # Final
+### Step 1 — Clone the repository
+```
+git clone <repository_url>
+cd <project_folder>
+```
 ## 2. Project Overview
 The system demonstrates secure backend architecture, authentication using JWT, role-based access control (RBAC), and ownership-based authorization for user-generated content.
 The application allows:
