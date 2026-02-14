@@ -53,44 +53,6 @@ npm install
 ```
 This installs all dependencies listed in `package.json`.
 ---
-## 4. Authentication Implementation
-
-Authentication is implemented using **JSON Web Tokens (JWT)**.
-
-### Registration
-
-```
-POST /auth/register
-```
-
-Creates a new user account. Passwords are hashed before storage.
-
----
-
-### Login
-
-```
-POST /auth/login
-```
-
-Upon successful authentication, a JWT token is issued:
-
-```json
-{
-  "token": "...",
-  "role": "user" or "admin"
-}
-```
-
-Protected endpoints require the following HTTP header:
-
-```
-Authorization: Bearer <token>
-```
-
-JWT authentication is handled by `authMiddleware.js`.
-
----
 
 ## 5. Authorization Strategy
 
