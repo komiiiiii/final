@@ -53,3 +53,81 @@ npm install
 ```
 This installs all dependencies listed in `package.json`.
 ---
+## 4. Authentication Implementation
+
+Authentication is implemented using **JSON Web Tokens (JWT)**.
+
+### Registration
+
+```
+POST /auth/register
+```
+
+Creates a new user account. Passwords are hashed before storage.
+
+---
+
+### Login
+
+```
+POST /auth/login
+```
+
+Upon successful authentication, a JWT token is issued:
+
+```json
+{
+  "token": "...",
+  "role": "user" or "admin"
+}
+```
+
+Protected endpoints require the following HTTP header:
+
+```
+Authorization: Bearer <token>
+```
+
+JWT authentication is handled by `authMiddleware.js`.
+
+---
+
+## 5. Authorization Strategy
+
+The system implements a combination of:
+
+* Role-Based Access Control (RBAC)
+* Ownership-Based Authorization
+
+### 5.1 Movies Access Control
+
+| Method | Access Level |
+| ------ | ------------ |
+| GET    | Public       |
+| POST   | Admin Only   |
+| PUT    | Admin Only   |
+| DELETE | Admin Only   |
+
+Movie catalog modifications are restricted to administrators.
+
+Role validation is handled by `roleMiddleware.js`.
+
+### 5.2 Reviews Access Control
+
+| Method | Access Level        |
+| ------ | ------------------- |
+| GET    | Public              |
+| POST   | Authenticated Users |
+| PUT    | Owner or Admin      |
+| DELETE | Owner or Admin      |
+
+Ownership validation is performed in `adminReviewMiddleware.js` by comparing:
+
+```
+review.userId === req.user.id
+```
+
+Administrators have override privileges.
+
+---
+
