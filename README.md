@@ -2,8 +2,8 @@
 # Final
 ### Step 1 — Clone the repository
 ```
-git clone <repository_url>
-cd <project_folder>
+git clone <https://github.com/komiiiiii/final>
+cd <ass1>
 ```
 ## 2. Project Overview
 The system demonstrates secure backend architecture, authentication using JWT, role-based access control (RBAC), and ownership-based authorization for user-generated content.
